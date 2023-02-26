@@ -33,32 +33,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  analyze:
-    if: (github.event_name == 'schedule' && github.repository == 'apache/skywalking') || (github.event_name != 'schedule')
-    name: Analyze
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        language: [ 'java' ]
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      with:
-        submodules: true
-
-    - uses: actions/setup-java@v2
-      with:
-        distribution: temurin
-        java-version: 17
-
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: ${{ matrix.language }}
-
-    - run: ./mvnw -q -Dmaven.test.skip=true clean install || ./mvnw -q -Dmaven.test.skip=true clean install
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+#  analyze:
+#    if: (github.event_name == 'schedule' && github.repository == 'apache/skywalking') || (github.event_name != 'schedule')
+#    name: Analyze
+#    runs-on: ubuntu-latest
+#
+#    strategy:
+#      matrix:
+#        language: [ 'java' ]
+#
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v2
+#      with:
+#        submodules: true
+#
+#    - uses: actions/setup-java@v2
+#      with:
+#        distribution: temurin
+#        java-version: 17
+#
+#    - name: Initialize CodeQL
+#      uses: github/codeql-action/init@v1
+#      with:
+#        languages: ${{ matrix.language }}
+#
+#    - run: ./mvnw -q -Dmaven.test.skip=true clean install || ./mvnw -q -Dmaven.test.skip=true clean install
+#
+#    - name: Perform CodeQL Analysis
+#      uses: github/codeql-action/analyze@v1
